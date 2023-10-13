@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.Test;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class ConfigMapTests {
 
@@ -16,10 +17,16 @@ public class ConfigMapTests {
 		String username = System.getenv("USERNAME");
 		String password = System.getenv("PASSWORD");
 	        System.out.println(testUrl);
-		WebDriver driver;
+		RemoteWebDriver driver;
 
 		if ("chrome".equals(browser)) {
-			driver = new ChromeDriver();
+			ChromeOptions chrome_options = new ChromeOptions();
+			chrome_options.addArguments("--no-sandbox"); 
+			chrome_options.addArguments("--disable-dev-shm-usage"); 
+			chrome_options.addArguments("--disable-notifications"); 
+			chrome_options.addArguments("--headless");
+			remoteWebdriver.set(new RemoteWebDriver(new URL("http://10.244.0.44:4444/wd/hub"), chrome_options));
+			break;
 		} else if ("firefox".equals(browser)) {
 			driver = new FirefoxDriver();
 		} else {
