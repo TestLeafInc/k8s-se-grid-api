@@ -15,7 +15,7 @@ public class ConfigMapTests {
 		String browser = System.getenv("BROWSER");
 		String username = System.getenv("USERNAME");
 		String password = System.getenv("PASSWORD");
-
+	        System.out.println(testUrl);
 		WebDriver driver;
 
 		if ("chrome".equals(browser)) {
